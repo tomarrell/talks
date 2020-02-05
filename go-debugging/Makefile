@@ -5,3 +5,5 @@ build:
 .PHONY: run
 run: build
 	open out.pdf
+
+.DEFAULT: run
