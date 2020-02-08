@@ -172,7 +172,7 @@ Why does go confuse existing debuggers?
 
 ---
 
-# Delve
+# Delve TODO
 
 - dlv run: start debugging, disables optimisations, compiles code, starts
     program, attaches to the process
@@ -183,8 +183,10 @@ Why does go confuse existing debuggers?
 - dlv attach <pid>: careful, program could be optimised and could run into
     issues
 
-runtime.Breakpoint() to trigger a breakpoint in your debugger, being able to set
+- runtime.Breakpoint() to trigger a breakpoint in your debugger, being able to set
 it in your program.
+
+- Checkpoints, restart your program from a specific place
 
 ---
 
