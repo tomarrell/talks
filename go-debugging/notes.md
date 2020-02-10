@@ -109,15 +109,16 @@ And how many of you have used GDB?
 
 Great, well if you've already worked with GDB, a lot of these concepts will
 already be familiar to you. Unfortunately though, Go programs tend confuse GDB
-with the way that they handle stack management and threading for example.
+with the way that they handle stack management, threading as well as a few other
+things.
 
 A quick example is the defer statement. You can use the defer statement to
 change the return value of the function, however this extra execution after a
-return is non-standard, and can lead to execution of code which is not known to
-GDB.
+return is non-standard, and can lead to execution of code which is not expected
+by GDB.
 
 GDB is also not aware of the Go scheduler's context switching. It is possible
-for a goroutine to be preempted, and scheduled on another processor, which can
+for a goroutine to be preempted and scheduled on another processor, which can
 cause the debugger to hang.
 
 Other limitations of GDB include it struggling with types derived from strings,
@@ -129,11 +130,13 @@ GDB is extremely versatile, and the Go team have released extensions to make
 using it more ergonomic. E.g. pretty printing strings, slices, maps, channels
 and interfaces. You can even print directly the length or capacity of slices.
 
-These all help to improve the usability of GDB, but we can do a little better.
+These all help to improve the usability of GDB, but we won't be covering GDB
+today. Instead, we'll first take a look at the most powerful debugger ever.
+fmt.Println.
 
 ---
 
-# Debugging: fmt.Println
+# fmt.Println()
 
 Print debugging is something that probably the majority of programmers are
 familiar with. It's a simple and easy to use tool, especially when you want to
@@ -147,18 +150,19 @@ running, and you can't restart it in fear that you'll have to wait another 3
 days for the bug to appear? Hence, sometimes you can save a lot of time by
 picking up some other tools.
 
-We'll go through a few examples of some tricky to debug situations, and see how
-we can solve them using a few tools in the Go ecosystem.
+We'll go through a few examples of some situations that would be a bit difficult
+for fmt.Println(), and see how we can solve them using some fo the tools in the
+Go ecosystem.
 
 ---
 
 # Race Conditions
 
-First up, we'll have a look at at race conditions.
+First up, we'll have a look at a race condition.
 
 In a few more words by someone a fair bit wiser than myself, "ignoring this
 prohibition [of data races] introduces a practical risk of future
-miscom-pilation of the program."
+miscom-pilation of the program." In a bit more layman's terms...
 
 > **No race is a safe race.**
 >
