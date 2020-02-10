@@ -200,9 +200,13 @@ Let's take a look at a simple program which contains a data race.
 You can analyse a crashed program in more detail, including getting views of the
 source as the program crashed.
 
+// TODO
+
 ---
 
 # Memory Leaks
+
+// TODO
 
 ---
 
@@ -234,7 +238,7 @@ you to trigger a breakpoint trap within your debugger on that line. This is
 particularly useful when you want to always stop at a particular place.
 
 * You can set checkpoints. These let you restart the program from a specific
-point.
+point. Unfortunately this doesn't work on Mac though.
 
 ---
 
@@ -265,24 +269,4 @@ Anyone have any questions?
 
 - dlv attach <pid>: careful, program could be optimised and could run into
     issues
-
-- Checkpoints, restart your program from a specific place (doesn't work on Mac)
-
----
-
-# Scenarios
-
-Come up with scenarios to show debugging different situations
-
-* Race condition
-* Deadlock
-* https://github.com/golang/go/wiki/CommonMistakes#using-goroutines-on-loop-iterator-variables
-
-
-
-
-
-
-
-
 
