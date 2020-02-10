@@ -23,8 +23,8 @@ For some context, Go has been used here in our SysOps team for a couple of
 years. But it only really reached a production backend service early last year.
 
 We run most of our services inside Kubernetes, on AWS, after a period of
-migrating away from more primitive deployments. Some teams have included in
-their migation breaking up monolithic Ruby services into smaller Go
+migrating away from more primitive deployment methods. Some teams have included
+in their migation breaking up monolithic Ruby services into smaller Go
 microservices, we'll touch on why this decision was made in a bit.
 
 In our payments domain, we have a custom environment bootstrapper we call
@@ -50,17 +50,22 @@ comfortable contributing.
 
 This has brought a massive improvement in productivity, reliability and
 observability of our processes. As well as a steady platform to expand our
-logistics operations easily into new markets.
+logistics operations into new markets.
 
 Go in particular has made this easy to do with its simplicity. We've found that
 engineers new to Go have had a easy time picking it up and becoming productive.
 
 Another benefit I consider is its relative lack of abstractions. Logistics is
 one of those domains with a large number of edge cases. Go intentionally doesn't
-give you the abstract power that some other languages do. Heavy use of
-abstractions puts the burden on the developer to be very careful that any
-abstractions they do implement are in fact valid across many different markets.
-Spoiler alert, I believe that's probably impossible.
+give you the power to build complicated abstractions that some other languages
+do.
+
+I find that heavy use of abstractions shifts the burden onto the *developer* to
+be sure that they are valid across a variety of scenerios, or in our case,
+markets. Spoiler alert, I believe that's probably impossible, and that most
+abstractions will begin to leak given enough time. Go nudges developers towards
+the path of practicality and solving the problem clearly, rather than
+introducing too much indirection.
 
 ---
 
@@ -68,32 +73,38 @@ Spoiler alert, I believe that's probably impossible.
 
 SumUp is in the stage of it's growth where scaling the engineering practices in
 the organisation is important. Our engineering is rather scattered across the
-globe, including in our offices in Sao Paulo Brazil, Sofia, Cologne and two here
-in Berlin.
+globe, including in our offices in Sao Paulo, Sofia, Cologne and two here in
+Berlin.
 
 Also, at SumUp we really encourage people to be "T" shaped. In other words,
 having a broad range of skills across many disciplines, while also specializing
 where needed.
 
 To do this, we support engineers who want to learn new things by helping them
-change teams, form new teams, and do all of this as simply as possible. Part of
-what makes this simple is having as much consistency across teams as makes
-sense. This makes it much easier for someone to get up to speed with the
+change teams, form new teams, and do this with as little friction as possible.
+Part of what makes this simple is having as much consistency across teams as
+makes sense. This makes it much easier for someone to get up to speed with the
 codebase of a new team in relatively little time. Adopting Go is a step towards
 this possibility, putting aside the yak shaving, leaving more time for decisions
 that bring value to the business.
 
 We now have teams in all 4 of our locations with engineering who are writing Go.
 
-// TODO ruby
+// **TODO**: Maybe comparison with Ruby?
 
 ---
 
 # Debugging: Tooling
 
-Debugging Go programs can be quite the non-trivial task. Especially when they
-become highly concurrent. Go programs also confuse GDB with the way that they
-handle stack management and threading for example.
+Now for the pivot over to debugging.
+
+If you've ever been debugging a Go program, you probably know it can be quite
+the non-trivial task at times. Especially when it becomes highly concurrent.
+Most of you have probably had experience with a debugger of some sort, and
+probably a fair majority have touched GDB.
+
+Unfortunately, Go programs tend confuse GDB with the way that they handle stack
+management and threading for example.
 
 A quick example is the defer statement. You can use the defer statement to
 change the return value of the function, however this extra execution after a
@@ -124,9 +135,9 @@ familiar with. It's a simple and easy to use tool, especially when you want to
 inspect very specific parts of your program, and are running things locally on
 your machine.
 
-However if either of those things is not clearly defined, the challenge begins. What
-if your bug occurs on the 237th iteration of this *for* loop? Or what if you
-don't know which iteration it occurs on? Or what if your program is already
+However if either of those things is not clearly defined, the challenge begins.
+What if your bug occurs on the 237th iteration of this *for* loop? Or what if
+you don't know which iteration it occurs on? Or what if your program is already
 running, and you can't restart it in fear that you'll have to wait another 3
 days for the bug to appear? Hence, sometimes you can save a lot of time by
 picking up a debugger.
@@ -135,17 +146,16 @@ picking up a debugger.
 
 # Race Detector:
 
-In the words of someone wiser than myself, "No race is a safe race." Don't
-get into the habit of thinking that you have a
-
-> No race is a safe race.
-> - Me, now().
-
 In a few more words by someone a fair bit wiser than myself, "ignoring this
 prohibition [of data races] introduces a practical risk of future
-miscom-pilation of the program." This is something we'd therefore like to avoid
-in order to prevent potential problems later down the line in our production
-software.
+miscom-pilation of the program."
+
+> **No race is a safe race.**
+>
+> – Me, just now.
+
+This is something we'd therefore like to avoid in order to prevent potential
+problems later down the line in our production software.
 
 ---
 
