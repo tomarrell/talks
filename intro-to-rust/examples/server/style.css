@@ -1,0 +1,11 @@
+body {
+  font-family: BlinkMacSystemFont;
+  text-align: center;
+}
+
+.post {
+  padding: 1rem;
+  background-color: #ccc;
+  margin: 0.5rem;
+}
+

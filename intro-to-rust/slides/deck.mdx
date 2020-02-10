@@ -1,0 +1,316 @@
+import { Head } from 'mdx-deck'
+
+export { default as theme } from './theme'
+
+<Head>
+  <title>Intro to Rust</title>
+</Head>
+
+## Rust AKL Inauguration 👋
+
+---
+
+## Rust Introduction
+
+What is Rust? What makes it special? + introduction to core concepts.
+
+Talk by ***Tom Arrell***
+
+Slides will be available at https://github.com/rust-akl/meetup
+
+<sub>Special thanks to <strong>Movio</strong> for providing the venue, food and drinks!</sub>
+
+---
+
+## Going forward
+
+Going forward with this meetup, we would like to foster the following.
+
+- Encourage new/all speakers
+- For all skill levels, beginner to advanced
+- Learn!
+
+---
+
+## Goal of this Talk
+
+Motivate new Rustaceans.
+
+We want beginners to be motivated to pick up and learn Rust for their next project.
+
+This will provide a hopefully smooth segway into the benefits of Rust, and why you might want to learn the language over say something else.
+
+---
+
+Alright, let's crack into it...
+
+---
+
+## What is Rust? 🤔
+
+Rust is a **systems programming language**... Meaning it gives you more direct access to **memory allocation**, **IO facilities** and/or **peripheral system hardware** — all while keeping memory and **runtime cost minimal** and enabling 'fearless concurrency'.
+
+But more importantly. It is:
+
+- Compiled
+- Statically typed (all types known at compile time)
+- Strongly typed (strict type assertions)
+- Memory safe (compile-time prevention of common segfaults)
+- Functional (first-class functions, immutability, et al)
+- Modern, composable, fun!
+
+---
+
+*1st Place* for "most loved programming language" - **Stack Overflow Developer Survey in 2016, 2017 and 2018.** 🏆
+
+---
+
+## Features
+
+- zero-cost abstractions
+- move semantics (transferring ownership)
+- guaranteed memory safety
+- threads without data races 🏃
+- trait-based generics
+- pattern matching
+- type inference
+- minimal runtime (no need for a garbage collector)
+- efficient C bindings
+- meta programming (declarative and procedural)
+
+---
+
+## Lesser-Known Tooling QOL Tidbits
+
+- Package management system — Cargo
+- Automatic documentation generation — Docs.rs
+- RustFmt - automatic code formatting
+- Clippy - powerful linting
+- Fantastic error messages (most of the time), very useful for compiler driven development shops
+
+---
+
+## Sidenote
+
+Rust has a fantastic community. The core teams are known for being extremely approachable and hanging out in several IRC channels, being more than willing to answer community questions. The subreddit is also a great place to go to get help.
+
+I consider this a significant feature in itself.
+
+---
+
+## Rust Goals 🥅
+
+Rust is "fundamentally about *empowerment*: no matter what kind of code you are writing now, Rust empowers you to reach farther, to program with **confidence** in a **wider variety of domains** than you did before."
+
+It persues the trifecta of *"safety, speed, and concurrency"* in its design decisions.
+
+---
+
+Because of these goals, Rust is *expressive enough* to build **web servers**, allowing for abstractions on top of requests, entities etc — *without sacrificing* its **bare-metal capabilities**. Easy FFI to C/C++ code, and manual memory manipulation through clearly marked unsafe code blocks.
+
+This allows for wrapping common unsafe code in **safe** interfaces.
+
+---
+
+## New Concepts 🔮
+
+Rust also introduces a few potentially unfamiliar concepts to a lot of people in order to carry out it's goals.
+
+---
+
+- **Ownership**
+
+The concept that memory is owned by a variable.
+
+- **Borrowing**
+
+The semantics around how that memory can be shared between other pieces of code.
+
+**...**
+
+---
+
+**...**
+
+- **Lifetimes**
+
+The automatic allocation and deallocation of memory for a given lifetime. <- How Rust can get away without manual memory management + no garbage collector.
+
+- **Smart Pointers**
+
+Pointers, with a little additional meta-data alongside traditional pointers. (C++)
+
+..and maybe a few more, depending on whether you come from a systems or application programming background—or this is your first language!
+
+---
+
+## Borrowing (cont...)
+
+Borring a reference to a piece of memory in Rust takes **two** forms.
+
+- **Immutable**
+- **Mutable**
+
+---
+
+## Immutable Borrow
+
+```rust
+fn main() {
+    let s1 = String::from("hello");
+
+    let len = calculate_length(&s1);
+
+    println!("The length of '{}' is {}.", s1, len);
+}
+
+fn calculate_length(s: &String) -> usize {
+    s.len()
+}
+```
+```
+>> The length of 'hello' is 5.
+```
+
+---
+
+## Mutable Borrow (Fail)
+
+```rust
+fn main() {
+    let s = String::from("hello");
+
+    change(&s);
+}
+
+fn change(some_string: &String) {
+    some_string.push_str(", world");
+}
+```
+```
+error[E0596]: cannot borrow immutable borrowed content `*some_string` as mutable
+ --> error.rs:8:5
+  |
+7 | fn change(some_string: &String) {
+  |                        ------- use `&mut String` here to make mutable
+8 |     some_string.push_str(", world");
+  |     ^^^^^^^^^^^ cannot borrow as mutable
+```
+
+---
+
+## Mutable Borrow (Success)
+
+```rust
+fn main() {
+    let mut s = String::from("Hello");
+
+    change(&mut s);
+    println!("{}", s);
+}
+
+fn change(some_string: &mut String) {
+    some_string.push_str(", World!");
+}
+```
+```
+>> Hello, World!
+```
+
+---
+
+## Composition
+
+Rust's type system uses **generics** in order to define generic behaviour which acts over arbitrary types. However in to inform the compiler the behaviour attached to a paritcular type, or bound the behaviour to types which implement specific functionality, Rust uses traits.
+
+Rust favours **composition** over **inheritance**. This comes in the form of **traits**. Traits are a core aspect to generic programming in Rust.
+
+Traits allow you to define a common interface for a type which implements the trait.
+
+---
+
+```rust
+pub struct Tweet {
+    pub username: String,
+    pub content: String,
+    pub reply: bool,
+    pub retweet: bool,
+}
+
+impl Summary for Tweet {
+    fn summarize(&self) -> String {
+        format!("{}: {}", self.username, self.content)
+    }
+}
+```
+
+---
+
+## Microservices in Rust
+
+Rust has many multi-purose, fast web-frameworks to help build high level web services. Some of these are based on the **Tokio** runtime (event loop, similar to Node.js).
+
+*A popular choice is **Rocket**:* https://rocket.rs/
+
+A neat alternative is also **Warp**.
+
+---
+
+## Example: Warp
+
+Warp is a Rust web framework for building applications using a combinator API.
+
+Inspired by Scala's Finch and Akka libraries.
+
+---
+
+## Embedded Example:
+
+<img src="https://i.imgur.com/h3Gnnof.jpg" width="1000px" />
+
+<br />
+<br />
+
+<sub>Running on a Raspberry Pi, so not reaaaaally embedded as I forgot to take a photo of me  running on an STM32F103C8</sub>
+
+---
+
+## Projects Using Rust
+
+There are tons of large scale projects using Rust right now. Some of these for example:
+
+**Xi** - Google text editor
+- https://github.com/google/xi-editor
+
+**Servo** - Mozilla's new browser engine
+- https://github.com/servo/servo
+
+**...**
+
+---
+
+**...**
+
+**Alacritty** - Cross platform GPU-accelerated terminal
+- https://github.com/jwilm/alacritty
+
+**Rocket** - A web framework for Rust
+- https://github.com/SergioBenitez/Rocket
+
+**Ripgrep** - A fast as heck grep alternative
+- https://github.com/BurntSushi/ripgrep
+
+---
+
+## Resources
+
+The Rust team maintains a book called "**The Rust Programming Language**." It is an invaluable resource for those of you looking to learn the language inside and out.
+
+You can find the 2018 edition of the book at: https://doc.rust-lang.org/book/
+
+---
+
+⚙️  **Thanks!** ⚙️
+
+Any Questions?
+

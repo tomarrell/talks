@@ -1,0 +1,8 @@
+[package]
+name = "server"
+version = "0.1.0"
+authors = ["Tom Arrell <tom.arrell@gmail.com>"]
+
+[dependencies]
+warp = "0.1.2"
+chrono = "0.4"
