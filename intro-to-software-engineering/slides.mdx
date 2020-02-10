@@ -1,0 +1,286 @@
+import { Appear, Image, Head } from 'mdx-deck';
+export { default as theme } from './theme'
+
+<Head>
+  <title>Building Software</title>
+</Head>
+
+# Hello! 👋
+
+---
+
+## Tom Arrell
+- Software Engineer at Movio
+- Case Study: Movio Media Product
+- SKC Old Collegian
+
+---
+
+## But... what about the language?
+
+Software engineering is about more than just the language. They come in all shapes and sizes.
+
+---
+
+<ul>
+  <Appear>
+    <li>Go</li>
+    <li>Scala</li>
+    <li>Javascript (Flow)</li>
+    <li>Python</li>
+    <li>Hopefully soon some Rust</li>
+  </Appear>
+</ul>
+
+---
+
+# Software Engineering
+
+What is Software *Engineering*?
+
+<ul>
+  <Appear>
+    <li>Processes</li>
+    <li>Teams</li>
+    <li>But why all the fuss...?</li>
+  </Appear>
+</ul>
+
+---
+
+# It delivers outcomes
+
+Software is about helping people. Without people, software is useless.
+
+---
+
+Businesses are in the business of providing value for their **customers**, and value for their **shareholders**.
+
+Therefore they want the process of building software to be as **efficient** as possible.
+
+But what does this mean?
+
+---
+
+# Inefficiencies in Software
+
+Time ⇔<sup>*</sup> Money
+<sub>* Logical equivalence</sub>
+
+---
+
+# 1. BUGS 🐞
+
+---
+
+# 2. BUGS
+
+---
+
+# 3. Yet again, bugs. 
+
+Except a year from now when you tried to change something and it brought down your entire production environment. 🤷
+
+---
+
+That old thing you said you would fix up real soon that led to a bug in production.
+
+```rust
+fn call_api(params) -> Result<bool, Error> {
+  // TODO make this work
+  unimplemented!()
+}
+```
+
+---
+
+# An Important Distinction
+
+---
+
+Things such as:
+
+- Changing requirements
+- Lack of thorough requirements
+- Scope creep
+
+Are process inefficiencies, mitigated by adhering to a process such as Scrum. But more on this later.
+
+---
+
+Facts of Life in Software:
+
+- Deadlines
+- Communication
+- Code will always <strong>change</strong>
+
+---
+
+## What can we do as developers to mitigate development inefficiencies?
+
+---
+
+## The Golden Rule of Building Software in Teams 🏆
+
+Write software that someone with absolutely no experience with the code can **quickly** and **confidently** understand and modify.
+
+---
+
+# 1. KISS
+
+Keep It Simple, Stupid
+
+---
+
+# 2. Testing
+
+Probably one of the most crucial guarantees an engineer has that his/her time has produced something of value.
+
+---
+
+## Automated Testing, 3 Flavours
+- Unit tests
+- Integration tests
+- End-to-end tests
+
+All with their own unique pros and cons.
+
+---
+
+## Unit test
+
+```rust
+  #[test]
+  fn it_works() {
+      assert_eq!("Hello", "Hello");
+  }
+```
+
+Testing a single unit of code. Usually a single function. Very cheap for both developer and execution overhead.
+
+---
+
+## Integration testing
+
+Tests integration between two modules of code. Usually requires some external dependencies and/or services to be running.
+
+Gives you good assurance. Medium time/maintenance cost.
+
+---
+
+## End-to-End testing
+
+Performs an entire test of the system from beginning to end. Usually follows critical paths that must be assured for the software to be considered functional.
+
+Quite brittle.
+
+---
+
+# 3. Source Control (Git/SVN/TFS)
+
+- Git (Linus Torvalds)
+- Apache Subversion
+- Team Foundation Server (Microsoft)
+
+---
+
+The goal of source control is to simplify multiple developers working on the same codebase.
+
+---
+
+Includes features such as:
+
+- Branches
+- Automatic merging
+- Decentralisation
+- Manual merging and code reviews
+
+---
+
+## Code Reviews
+
+Valuable feedback, important to get a second or third opinion on implementation.
+
+---
+
+A must have when working with software with multiple people. I have personally not worked on a single project without using Git in some capacity.
+
+https://github.com
+
+Go sign up for free.
+
+---
+
+# 4. Continuous Integration || Continuous Deployment
+
+Software moves fast. Getting it to the customer should be the same.
+
+---
+
+Deploying code should be as pain free as possible.
+
+---
+
+<Image src="./assets/cicd.png" size="800px" />
+
+---
+
+## Usually comes with:
+
+- Multiple environments (Development, Staing, Production)
+- Automated test running
+- Build management
+- Rollback ability
+
+---
+
+## Common tools: 
+
+- TravisCI
+- Jenkins
+- CircleCI
+- BuildKite
+
+---
+
+# 5. Processes
+
+Won't spend much time, basically a combination of the above, with more soft skills.
+
+Then why do we do it?
+
+---
+
+## Process... Why?
+
+- Give management visibility
+- Keep direction and focus amongst the team
+- Make sure everyone knows what they're working on
+- Iterate
+
+---
+
+## Process Examples:
+
+- Agile (umbrella), waterfall, prototyping 
+
+**Agile Methodologies**: Scrum, Kanban, extreme programming
+
+**Agile Practices**: TDD, BDD, Pair programming
+
+---
+
+And, that's about it!
+
+---
+
+If you're able to nail those things within your organization, you're well on your way to building **reliable**, **maintainable** software, without spending a *lifetime*, nor an *arm or a leg* doing it! 👍
+
+---
+
+### But if you take one thing away from this talk today...
+
+---
+
+Software is fun, challenging, and you will be constantly learning.
+
