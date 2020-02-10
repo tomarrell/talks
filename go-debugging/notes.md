@@ -89,23 +89,7 @@ We now have teams in all 4 of our locations with engineering who are writing Go.
 
 ---
 
-# Debugging: Downsides of fmt.Println
-
-Print debugging is something that probably the majority of programmers are
-familiar with. It's a simple and easy to use tool, especially when you want to
-inspect very specific parts of your program, and are running things locally on
-your machine.
-
-However if either of those things is not clearly defined, the challenge begins. What
-if your bug occurs on the 237th iteration of this *for* loop? Or what if you
-don't know which iteration it occurs on? Or what if your program is already
-running, and you can't restart it in fear that you'll have to wait another 3
-days for the bug to appear? Hence, sometimes you can save a lot of time by
-picking up a debugger.
-
----
-
-# Debugging: GDB
+# Debugging: Tooling
 
 Debugging Go programs can be quite the non-trivial task. Especially when they
 become highly concurrent. Go programs also confuse GDB with the way that they
@@ -133,6 +117,38 @@ These all help to improve the usability of GDB, but we can do a little better.
 
 ---
 
+# Debugging: fmt.Println
+
+Print debugging is something that probably the majority of programmers are
+familiar with. It's a simple and easy to use tool, especially when you want to
+inspect very specific parts of your program, and are running things locally on
+your machine.
+
+However if either of those things is not clearly defined, the challenge begins. What
+if your bug occurs on the 237th iteration of this *for* loop? Or what if you
+don't know which iteration it occurs on? Or what if your program is already
+running, and you can't restart it in fear that you'll have to wait another 3
+days for the bug to appear? Hence, sometimes you can save a lot of time by
+picking up a debugger.
+
+---
+
+# Race Detector:
+
+In the words of someone wiser than myself, "No race is a safe race." Don't
+get into the habit of thinking that you have a
+
+> No race is a safe race.
+> - Me, now().
+
+In a few more words by someone a fair bit wiser than myself, "ignoring this
+prohibition [of data races] introduces a practical risk of future
+miscom-pilation of the program." This is something we'd therefore like to avoid
+in order to prevent potential problems later down the line in our production
+software.
+
+---
+
 # Debugging: Delve
 
 Enter Delve. Now I'd expect a lot of people here have probably heard, if not
@@ -150,13 +166,6 @@ running within a Docker container.
 
 ---
 
-# Race Detector:
-
-In the words of someone much wiser than myself, "No race is a safe race." Don't
-get into the habit of thinking that you have a
-
----
-
 # Core Dumps
 
 You can analyse a crashed program in more detail, including getting views of the
@@ -166,6 +175,24 @@ source as the program crashed.
 
 # Memory Leaks
 
+
+---
+
+# Goroutine blocking
+
+Debugging deadlocks within your program can be one of the most difficult things
+to debug. Especially in highly concurrent programs.
+
+Deadlocks can occur when two threads hold resources that the other is
+requesting. It can be made even more obscure when hidden behind a race
+condition, which was a case we ran into with a popular AMQP library.
+
+pprof provides a profile for inspecting blocking behaviour in go programs,
+handily named the "blocking profile".
+
+---
+
+# Goroutine Leaks
 
 ---
 
@@ -220,7 +247,7 @@ Why does go confuse existing debuggers?
 - runtime.Breakpoint() to trigger a breakpoint in your debugger, being able to set
 it in your program.
 
-- Checkpoints, restart your program from a specific place
+- Checkpoints, restart your program from a specific place (doesn't work on Mac)
 
 ---
 
