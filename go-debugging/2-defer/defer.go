@@ -2,6 +2,8 @@ package main
 
 import "fmt"
 
+// What do you think this code will write?
+
 func main() {
 	a := getRand()
 	fmt.Println(a)

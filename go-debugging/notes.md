@@ -89,7 +89,6 @@ We now have teams in all 4 of our locations with engineering who are writing Go.
 
 ---
 
-
 # Debugging: Downsides of fmt.Println
 
 Print debugging is something that probably the majority of programmers are
@@ -112,6 +111,15 @@ Debugging Go programs can be quite the non-trivial task. Especially when they
 become highly concurrent. Go programs also confuse GDB with the way that they
 handle stack management and threading for example.
 
+A quick example is the defer statement. You can use the defer statement to
+change the return value of the function, however this extra execution after a
+return is non-standard, and can lead to execution of code which is not known to
+GDB.
+
+GDB is also not aware of the Go scheduler's context switching. It is possible
+for a goroutine to be preempted, and scheduled on another processor, which can
+cause the debugger to hang.
+
 Other limitations of GDB include it struggling with types derived from strings,
 and method qualifications from packages, causing it to treat identifiers
 including a "." as unstructured literals. This is made even more difficult when
@@ -125,12 +133,31 @@ These all help to improve the usability of GDB, but we can do a little better.
 
 ---
 
-# Debugging: 
+# Debugging: Delve
 
 Enter Delve. Now I'd expect a lot of people here have probably heard, if not
 used Delve themselves to debug their programs. It's been around for quite a
 while these days, having been started by Derek Parker back in early 2014.
 
+Delve was purpose built for debugging Go, and deals with some of the shortfalls
+that are present in GDB.
+
+Probably the best way I can introduce the power of Delve is through a demo.
+
+---
+
+# Race Detector:
+
+In the words of someone much wiser than myself, "No race is a safe race." Don't
+get into the habit of thinking that you have a
+
+---
+
+# Core Dumps
+
+---
+
+# Memory Leaks
 
 
 ---
