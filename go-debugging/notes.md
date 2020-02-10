@@ -94,7 +94,7 @@ We now have teams in all 4 of our locations with engineering who are writing Go.
 
 ---
 
-# Debugging: Tooling
+# Go and GDB
 
 Now for the pivot over to debugging.
 
@@ -156,6 +156,24 @@ Go ecosystem.
 
 ---
 
+# Delve
+
+Enter Delve. Now I'd expect a lot of people here have probably heard, if not
+used Delve themselves to debug their programs. It's been around for quite a
+while these days, having been started by Derek Parker back in early 2014.
+
+Delve was purpose built for debugging Go, and deals with some of the shortfalls
+that are present in GDB.
+
+We'll be making use of Delve to debug throughout a few of the scenarios that we
+have.
+
+And just something to note, Delve works best on Linux, a few commands are only
+available on Linux. If you're running a Mac, you can get most of the benefit
+running within a Docker container.
+
+---
+
 # Race Conditions
 
 First up, we'll have a look at a race condition.
@@ -177,23 +195,6 @@ Let's take a look at a simple program which contains a data race.
 
 ---
 
-# Debugging: Delve
-
-Enter Delve. Now I'd expect a lot of people here have probably heard, if not
-used Delve themselves to debug their programs. It's been around for quite a
-while these days, having been started by Derek Parker back in early 2014.
-
-Delve was purpose built for debugging Go, and deals with some of the shortfalls
-that are present in GDB.
-
-Probably the best way I can introduce the power of Delve is through a demo.
-
-Just something to note, Delve works best on Linux, a few commands are only
-available on Linux. If you're running a Mac, you can get most of the benefit
-running within a Docker container.
-
----
-
 # Core Dumps
 
 You can analyse a crashed program in more detail, including getting views of the
@@ -202,7 +203,6 @@ source as the program crashed.
 ---
 
 # Memory Leaks
-
 
 ---
 
