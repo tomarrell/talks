@@ -233,6 +233,9 @@ use it to debug your test binaries as well.
 you to trigger a breakpoint trap within your debugger on that line. This is
 particularly useful when you want to always stop at a particular place.
 
+* You can set checkpoints. These let you restart the program from a specific
+point.
+
 ---
 
 # Conclusion
@@ -262,9 +265,6 @@ Anyone have any questions?
 
 - dlv attach <pid>: careful, program could be optimised and could run into
     issues
-
-- runtime.Breakpoint() to trigger a breakpoint in your debugger, being able to set
-it in your program.
 
 - Checkpoints, restart your program from a specific place (doesn't work on Mac)
 
