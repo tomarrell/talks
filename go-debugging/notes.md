@@ -99,12 +99,17 @@ We now have teams in all 4 of our locations with engineering who are writing Go.
 Now for the pivot over to debugging.
 
 If you've ever been debugging a Go program, you probably know it can be quite
-the non-trivial task at times. Especially when it becomes highly concurrent.
-Most of you have probably had experience with a debugger of some sort, and
-probably a fair majority have touched GDB.
+the non-trivial task at times. Especially when your program is highly
+concurrent.
 
-Unfortunately, Go programs tend confuse GDB with the way that they handle stack
-management and threading for example.
+Could I get a show of hands of those that have used an interactive debugger of
+some sort.
+
+And how many of you have used GDB?
+
+Great, well if you've already worked with GDB, a lot of these concepts will
+already be familiar to you. Unfortunately though, Go programs tend confuse GDB
+with the way that they handle stack management and threading for example.
 
 A quick example is the defer statement. You can use the defer statement to
 change the return value of the function, however this extra execution after a
@@ -135,16 +140,21 @@ familiar with. It's a simple and easy to use tool, especially when you want to
 inspect very specific parts of your program, and are running things locally on
 your machine.
 
-However if either of those things is not clearly defined, the challenge begins.
-What if your bug occurs on the 237th iteration of this *for* loop? Or what if
-you don't know which iteration it occurs on? Or what if your program is already
+However if either of those things is not the case, the challenge begins.  What
+if your bug occurs on the 237th iteration of this *for* loop? Or what if you
+don't know which iteration it occurs on? Or what if your program is already
 running, and you can't restart it in fear that you'll have to wait another 3
 days for the bug to appear? Hence, sometimes you can save a lot of time by
-picking up a debugger.
+picking up some other tools.
+
+We'll go through a few examples of some tricky to debug situations, and see how
+we can solve them using a few tools in the Go ecosystem.
 
 ---
 
-# Race Detector:
+# Race Conditions
+
+First up, we'll have a look at at race conditions.
 
 In a few more words by someone a fair bit wiser than myself, "ignoring this
 prohibition [of data races] introduces a practical risk of future
@@ -188,7 +198,7 @@ source as the program crashed.
 
 ---
 
-# Goroutine blocking
+# Goroutine Deadlocks
 
 Debugging deadlocks within your program can be one of the most difficult things
 to debug. Especially in highly concurrent programs.
