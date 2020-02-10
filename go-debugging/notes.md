@@ -162,7 +162,7 @@ First up, we'll have a look at a race condition.
 
 Someone a fair bit wiser than myself once said that, "ignoring this prohibition
 [of data races] introduces a practical risk of future miscompilation of the
-program." In a bit more layman's terms, the dude was essentially saying...
+program."[1] In a bit more layman's terms, the dude was essentially saying...
 
 > **No race is a safe race.**
 >
@@ -172,6 +172,8 @@ This is something we'd therefore like to avoid in order to prevent potential
 problems later down the line in our production software.
 
 Let's take a look at a simple program which contains a data race.
+
+[1]: https://www.usenix.org/legacy/event/hotpar11/tech/final_files/Boehm.pdf
 
 ---
 
