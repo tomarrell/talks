@@ -210,6 +210,12 @@ source as the program crashed.
 
 ---
 
+# Goroutine Leaks
+
+// TODO
+
+---
+
 # Goroutine Deadlocks
 
 Debugging deadlocks within your program can be one of the most difficult things
@@ -221,10 +227,6 @@ condition, which was a case we ran into with a popular AMQP library.
 
 pprof provides a profile for inspecting blocking behaviour in go programs,
 handily named the "blocking profile".
-
----
-
-# Goroutine Leaks
 
 ---
 
