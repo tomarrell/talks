@@ -160,9 +160,9 @@ Go ecosystem.
 
 First up, we'll have a look at a race condition.
 
-In a few more words by someone a fair bit wiser than myself, "ignoring this
-prohibition [of data races] introduces a practical risk of future
-miscom-pilation of the program." In a bit more layman's terms...
+Someone a fair bit wiser than myself once said that, "ignoring this prohibition
+[of data races] introduces a practical risk of future miscompilation of the
+program." In a bit more layman's terms, the dude was essentially saying...
 
 > **No race is a safe race.**
 >
@@ -170,6 +170,8 @@ miscom-pilation of the program." In a bit more layman's terms...
 
 This is something we'd therefore like to avoid in order to prevent potential
 problems later down the line in our production software.
+
+Let's take a look at a simple program which contains a data race.
 
 ---
 
@@ -217,6 +219,17 @@ handily named the "blocking profile".
 ---
 
 # Goroutine Leaks
+
+---
+
+# Conclusion
+
+Let this talk be an example of different ways to debug some problems you'll
+inevitably run into when writing a lot of Go. This is by no means and exhaustive
+list, and I would strongly recommend you use the most suitable tool for the job
+in each situation.
+
+Sometimes, fmt.Println really is just the best way to go.
 
 ---
 
