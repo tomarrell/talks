@@ -144,6 +144,10 @@ that are present in GDB.
 
 Probably the best way I can introduce the power of Delve is through a demo.
 
+Just something to note, Delve works best on Linux, a few commands are only
+available on Linux. If you're running a Mac, you can get most of the benefit
+running within a Docker container.
+
 ---
 
 # Race Detector:
@@ -154,6 +158,9 @@ get into the habit of thinking that you have a
 ---
 
 # Core Dumps
+
+You can analyse a crashed program in more detail, including getting views of the
+source as the program crashed.
 
 ---
 
