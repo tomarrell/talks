@@ -176,6 +176,10 @@ func main() {
 
 ---
 
+# Scenario #2: Deferred functions
+
+---
+
 *fin*
 
 **Questions?**

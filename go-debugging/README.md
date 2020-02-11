@@ -249,12 +249,29 @@ Let's take a look at a simple program which contains a data race.
 
 ---
 
+# Defer
+
+Defer is a well loved Go feature, allowing you to schedule work to be done
+before the function exits. 
+
+The unique thing about defer which makes it more powerful than simply having the
+compiler inline statements however is that it can be dynamically set.
+
+You can defer functions from within loops, conditionals, even switches.
+
+The caveat here however is that defers can also have access to the local scope,
+making it possible to change the values of the return values.
+
+---
+
 # Core Dumps
 
-You can analyse a crashed program in more detail, including getting views of the
-source as the program crashed.
+Core dumps are essentially a snapshot of a process' memory at the time it
+crashed. They allow you to analyse a crashed program in more detail, including
+getting views of the source as the program crashed.
 
-// TODO
+We'll have a look at how we can setup an application to generate a core dump
+when it crashes, and what sort of analysis we can do to it.
 
 ---
 
