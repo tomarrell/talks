@@ -4,6 +4,17 @@
 
 ---
 
+# About me
+
+## Tom Arrell 
+
+- Senior Backend Engineer @ SumUp
+- Logistics Squad
+- twitter:  twitter.com/tom_arrell
+- github:   github.com/tomarrell
+
+---
+
 # Agenda
 
 :::incremental
@@ -71,6 +82,12 @@
 # Leaky Abstractions
 
 ![Leaky Rust Abstraction](./media/rust-dense.jpg){ width=350px }
+
+---
+
+# Ruby to Go
+
+![Ruby to Go, why?](./media/ruby-to-go.jpg)
 
 ---
 
