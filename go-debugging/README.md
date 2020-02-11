@@ -262,6 +262,8 @@ You can defer functions from within loops, conditionals, even switches.
 The caveat here however is that defers can also have access to the local scope,
 making it possible to change the values of the return values.
 
+We'll take a look at how we might be able to debug the execution of defer statements.
+
 ---
 
 # Core Dumps

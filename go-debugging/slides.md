@@ -178,6 +178,23 @@ func main() {
 
 # Scenario #2: Deferred functions
 
+Are you getting values back from your function that you don't expect?
+
+Do you want to know which defer statements are being called?
+
+### Note:
+
+The Go objdump tool displays the x86 assembly in **AT&T** syntax, whereas
+Delve displays it in **Intel** syntax.
+
+### Terms:
+
+- **SP**: Stack pointer: top of stack.
+
+---
+
+# Scenario #3: Postmortem
+
 ---
 
 *fin*

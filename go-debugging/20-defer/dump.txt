@@ -1,0 +1,97 @@
+TEXT main.main(SB) /Users/tom/Documents/talks/go-debugging/20-defer/defer.go
+  defer.go:7            0x10994d0               65488b0c2530000000      MOVQ GS:0x30, CX
+  defer.go:7            0x10994d9               483b6110                CMPQ 0x10(CX), SP
+  defer.go:7            0x10994dd               7678                    JBE 0x1099557
+  defer.go:7            0x10994df               4883ec58                SUBQ $0x58, SP
+  defer.go:7            0x10994e3               48896c2450              MOVQ BP, 0x50(SP)
+  defer.go:7            0x10994e8               488d6c2450              LEAQ 0x50(SP), BP
+  defer.go:8            0x10994ed               e87e000000              CALL main.getRand(SB)
+  defer.go:9            0x10994f2               e839f7f6ff              CALL runtime.convT64(SB)
+  defer.go:9            0x10994f7               488b442408              MOVQ 0x8(SP), AX
+  defer.go:9            0x10994fc               0f57c0                  XORPS X0, X0
+  defer.go:9            0x10994ff               0f11442440              MOVUPS X0, 0x40(SP)
+  defer.go:9            0x1099504               488d0df5100100          LEAQ runtime.types+69568(SB), CX
+  defer.go:9            0x109950b               48894c2440              MOVQ CX, 0x40(SP)
+  defer.go:9            0x1099510               4889442448              MOVQ AX, 0x48(SP)
+  print.go:274          0x1099515               488b05bcea0d00          MOVQ os.Stdout(SB), AX
+  print.go:274          0x109951c               488d0d5d1a0500          LEAQ go.itab.*os.File,io.Writer(SB), CX
+  print.go:274          0x1099523               48890c24                MOVQ CX, 0(SP)
+  print.go:274          0x1099527               4889442408              MOVQ AX, 0x8(SP)
+  print.go:274          0x109952c               488d442440              LEAQ 0x40(SP), AX
+  print.go:274          0x1099531               4889442410              MOVQ AX, 0x10(SP)
+  print.go:274          0x1099536               48c744241801000000      MOVQ $0x1, 0x18(SP)
+  print.go:274          0x109953f               48c744242001000000      MOVQ $0x1, 0x20(SP)
+  print.go:274          0x1099548               e8e397ffff              CALL fmt.Fprintln(SB)
+  print.go:274          0x109954d               488b6c2450              MOVQ 0x50(SP), BP
+  print.go:274          0x1099552               4883c458                ADDQ $0x58, SP
+  print.go:274          0x1099556               c3                      RET
+  defer.go:7            0x1099557               e8c47ffbff              CALL runtime.morestack_noctxt(SB)
+  defer.go:7            0x109955c               e96fffffff              JMP main.main(SB)
+  :-1                   0x1099561               cc                      INT $0x3
+  :-1                   0x1099562               cc                      INT $0x3
+  :-1                   0x1099563               cc                      INT $0x3
+  :-1                   0x1099564               cc                      INT $0x3
+  :-1                   0x1099565               cc                      INT $0x3
+  :-1                   0x1099566               cc                      INT $0x3
+  :-1                   0x1099567               cc                      INT $0x3
+  :-1                   0x1099568               cc                      INT $0x3
+  :-1                   0x1099569               cc                      INT $0x3
+  :-1                   0x109956a               cc                      INT $0x3
+  :-1                   0x109956b               cc                      INT $0x3
+  :-1                   0x109956c               cc                      INT $0x3
+  :-1                   0x109956d               cc                      INT $0x3
+  :-1                   0x109956e               cc                      INT $0x3
+  :-1                   0x109956f               cc                      INT $0x3
+
+TEXT main.getRand(SB) /Users/tom/Documents/talks/go-debugging/20-defer/defer.go
+  defer.go:12           0x1099570               65488b0c2530000000      MOVQ GS:0x30, CX
+  defer.go:12           0x1099579               483b6110                CMPQ 0x10(CX), SP
+  defer.go:12           0x109957d               767a                    JBE 0x10995f9
+X defer.go:12           0x109957f               4883ec50                SUBQ $0x50, SP
+  defer.go:12           0x1099583               48896c2448              MOVQ BP, 0x48(SP)
+  defer.go:12           0x1099588               488d6c2448              LEAQ 0x48(SP), BP
+  defer.go:12           0x109958d               48c744245800000000      MOVQ $0x0, 0x58(SP)
+X defer.go:13           0x1099596               48c744240803000000      MOVQ $0x3, 0x8(SP)
+  defer.go:14           0x109959f               c744241008000000        MOVL $0x8, 0x10(SP)
+  defer.go:14           0x10995a7               488d05badd0300          LEAQ go.func.*+118(SB), AX
+  defer.go:14           0x10995ae               4889442428              MOVQ AX, 0x28(SP)
+  defer.go:14           0x10995b3               488d442408              LEAQ 0x8(SP), AX
+  defer.go:14           0x10995b8               4889442440              MOVQ AX, 0x40(SP)
+  defer.go:14           0x10995bd               488d442410              LEAQ 0x10(SP), AX
+  defer.go:14           0x10995c2               48890424                MOVQ AX, 0(SP)
+  defer.go:14           0x10995c6               e805eff8ff              CALL runtime.deferprocStack(SB)
+  defer.go:14           0x10995cb               85c0                    TESTL AX, AX
+  defer.go:14           0x10995cd               751a                    JNE 0x10995e9
+X defer.go:16           0x10995cf               488b442408              MOVQ 0x8(SP), AX
+X defer.go:16           0x10995d4               4889442458              MOVQ AX, 0x58(SP)            <== This is when we prepare the return value
+  defer.go:16           0x10995d9               90                      NOPL
+  defer.go:16           0x10995da               e8f1f4f8ff              CALL runtime.deferreturn(SB) <== This is when we call the defer function
+  defer.go:16           0x10995df               488b6c2448              MOVQ 0x48(SP), BP
+  defer.go:16           0x10995e4               4883c450                ADDQ $0x50, SP
+  defer.go:16           0x10995e8               c3                      RET
+  defer.go:14           0x10995e9               90                      NOPL
+  defer.go:14           0x10995ea               e8e1f4f8ff              CALL runtime.deferreturn(SB)
+  defer.go:14           0x10995ef               488b6c2448              MOVQ 0x48(SP), BP
+  defer.go:14           0x10995f4               4883c450                ADDQ $0x50, SP
+  defer.go:14           0x10995f8               c3                      RET
+  defer.go:12           0x10995f9               e8227ffbff              CALL runtime.morestack_noctxt(SB)
+  defer.go:12           0x10995fe               e96dffffff              JMP main.getRand(SB)
+  :-1                   0x1099603               cc                      INT $0x3
+  :-1                   0x1099604               cc                      INT $0x3
+  :-1                   0x1099605               cc                      INT $0x3
+  :-1                   0x1099606               cc                      INT $0x3
+  :-1                   0x1099607               cc                      INT $0x3
+  :-1                   0x1099608               cc                      INT $0x3
+  :-1                   0x1099609               cc                      INT $0x3
+  :-1                   0x109960a               cc                      INT $0x3
+  :-1                   0x109960b               cc                      INT $0x3
+  :-1                   0x109960c               cc                      INT $0x3
+  :-1                   0x109960d               cc                      INT $0x3
+  :-1                   0x109960e               cc                      INT $0x3
+  :-1                   0x109960f               cc                      INT $0x3
+
+TEXT main.oddFunc(SB) /Users/tom/Documents/talks/go-debugging/20-defer/defer.go
+  defer.go:20           0x1099610               48b8cf15ff3aa9b7b21a    MOVQ $0x1ab2b7a93aff15cf, AX
+  defer.go:20           0x109961a               488b4c2408              MOVQ 0x8(SP), CX
+  defer.go:20           0x109961f               488901                  MOVQ AX, 0(CX)
+  defer.go:21           0x1099622               c3                      RET

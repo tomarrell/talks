@@ -3,17 +3,18 @@ package main
 import (
 	"log"
 	"net/http"
+	"syscall"
 )
 
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		log.Println("received request")
 		w.Write([]byte("HELLO WORLD\n"))
+
+		// Uh oh...
+		syscall.Kill(syscall.Getpid(), syscall.SIGQUIT)
 	})
 
-	// aList := []int{1, 2, 3, 4}
-	// num := aList[10]
-	// fmt.Println(num)
+	// panic("test")
 
 	log.Println("Starting server...")
 	log.Fatal(http.ListenAndServe(":8080", nil))

@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-// What do you think this code will write?
+// What will this code print?
 
 func main() {
 	a := getRand()
