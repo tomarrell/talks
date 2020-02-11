@@ -78,6 +78,8 @@ abstractions will begin to leak given enough time. Go nudges developers towards
 the path of practicality and solving the problem clearly, rather than
 introducing too much indirection.
 
+<- slide ->
+
 ---
 
 # Why we're moving to Go
@@ -113,10 +115,12 @@ because of this, even if they've had prior experience with the concrete
 technologies such as Postgres, RabbitMQ, or even parallel ones such as
 Kubernetes cron jobs.
 
-From a hiring perspective, it's no longer feasible to hire developers who must
-have had experience with technology X. Therefore, we're investing in reducing
-abstractions where we can, to make our job of onboarding people easier. Go is an
-important piece in that puzzle for us.
+From a hiring perspective, it's no longer feasible for us to hire developers who
+must have had experience with technology X. Therefore, we're investing in
+reducing abstractions where we can, to make our job of onboarding people easier.
+Go is an important piece in that puzzle for us.
+
+<- slide ->
 
 ---
 
@@ -127,6 +131,49 @@ Now for the pivot over to debugging.
 If you've ever been debugging a Go program, you probably know it can be quite
 the non-trivial task at times. Especially when your program is highly
 concurrent.
+
+I also want to add a preface that debuggers themselves should not be a
+replacement for careful thought. Rob Pike said himself:
+
+> If you dive into the bug, you tend to fix the local issue in the code, but if
+> you think about the bug first, how the bug came to be, you often find and
+> correct a higher-level problem in the code that will improve the design and
+> prevent further bugs.
+>
+> – Rob Pike
+
+<- slide ->
+
+---
+
+# fmt.Println()
+
+Print debugging is something that probably the majority of programmers are
+familiar with. It's a simple and easy to use tool, especially when you want to
+inspect very specific parts of your program and are running things locally on
+your machine.
+
+In fact, I'm going to go out there are say that fmt.Println() is probably the
+most universal, and all powerful debugger.
+
+<- slide ->
+
+However, if either of those things doesn't hold, then the challenge begins, and
+only the brave should stick around. What if your bug occurs on the 237th
+iteration of this *for* loop? Or what if you don't know which iteration it
+occurs on? Or what if your program is already running, and you can't restart it
+in fear that you'll have to wait another 3 days for the bug to appear? Hence,
+sometimes you can save a lot of time by picking up some other tools.
+
+We'll go through a few examples of some situations that would be a bit difficult
+for fmt.Println(), and see how we can solve them using some fo the tools in the
+Go ecosystem.
+
+<- slide ->
+
+---
+
+# GDB (GNU Debugger)
 
 Could I get a show of hands of those that have used an interactive debugger of
 some sort.
@@ -157,28 +204,9 @@ using it more ergonomic. E.g. pretty printing strings, slices, maps, channels
 and interfaces. You can even print directly the length or capacity of slices.
 
 These all help to improve the usability of GDB, but we won't be covering GDB
-today. Instead, we'll first take a look at the most powerful debugger ever.
-fmt.Println.
+today.
 
----
-
-# fmt.Println()
-
-Print debugging is something that probably the majority of programmers are
-familiar with. It's a simple and easy to use tool, especially when you want to
-inspect very specific parts of your program, and are running things locally on
-your machine.
-
-However, if either of those things is not the case, the challenge begins.  What
-if your bug occurs on the 237th iteration of this *for* loop? Or what if you
-don't know which iteration it occurs on? Or what if your program is already
-running, and you can't restart it in fear that you'll have to wait another 3
-days for the bug to appear? Hence, sometimes you can save a lot of time by
-picking up some other tools.
-
-We'll go through a few examples of some situations that would be a bit difficult
-for fmt.Println(), and see how we can solve them using some fo the tools in the
-Go ecosystem.
+<- slide ->
 
 ---
 
@@ -191,8 +219,8 @@ while these days, having been started by Derek Parker back in early 2014.
 Delve was purpose built for debugging Go, and deals with some of the shortfalls
 that are present in GDB.
 
-We'll be making use of Delve to debug throughout a few of the scenarios that we
-have.
+We'll be making use of Delve a couple of times to help debug during a few of the
+scenarios that we have.
 
 And just something to note, Delve works best on Linux, a few commands are only
 available on Linux. If you're running a Mac, you can get most of the benefit

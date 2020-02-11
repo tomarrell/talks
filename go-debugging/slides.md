@@ -76,7 +76,7 @@
 
 > All non-trivial abstractions, to some degree, are leaky.
 > 
-> – Joel Spolsky
+> – **Joel Spolsky**
 
 ---
 
@@ -89,6 +89,90 @@
 # Ruby to Go
 
 ![Ruby to Go, why?](./media/ruby-to-go.jpg)
+
+---
+
+# Now what you came for... Debugging.
+
+We'll take a look at a few contrived scenarios, and how we might be able to get
+some more insight with as little (or as much) effort as possible.
+
+---
+
+# Words of Wisdom
+
+> If you dive into the bug, you tend to fix the local issue in the code, but if
+> you think about the bug first, how the bug came to be, you often find and
+> correct a higher-level problem in the code that will improve the design and
+> prevent further bugs.
+>
+> – **Rob Pike**
+
+--- 
+
+# fmt.Println()
+
+> fmt.Println() is the most universal, and all powerful debugger. Fight me.
+>
+> – **Me, circ. now**
+
+---
+
+# fmt.Println()
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+  fmt.Println("HERE")
+  go func() {
+    fmt.Println("Why are you not running?!")
+  }()
+  fmt.Println("HERE 2")
+}
+```
+
+---
+
+# GNU Debugger
+
+- Ok if you're using CGO
+- Not so ok if you're writing plain Go
+    - Defer statements
+    - The scheduler, context switching
+    - Custom type defs of builtin types
+    - Some identifiers
+
+---
+
+# Delve 
+
+- Dedicated debugger for Go programs
+- Supports debugging:
+  - Running processes
+  - Examining core dumps
+  - Built from scratch programs
+  - Tests
+  - Tracing
+
+---
+
+# Scenario #1: Race Conditions
+
+> ...ignoring this prohibition [of data races] introduces a practical risk of
+> future miscompilation of the program.
+> 
+> – **Hans-J. Boehm**
+
+---
+
+# Scenario #1: Race Conditions
+
+> No race is a safe race.
+>
+> – **Me, just now**
 
 ---
 
