@@ -187,10 +187,10 @@ catching. *Profile your application*.
 
 Also.
 
-```
+```bash
 $ go test -race mypkg   // check for races during tests
-$ go build -race mycmd  // build a binary with race detector
-$ go run -race mysrc.go // immediate run with race detector
+$ go build -race mycmd  // build a binary with R.D.
+$ go run -race mysrc.go // immediate run with R.D.
 ```
 
 ---
