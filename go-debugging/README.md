@@ -34,6 +34,8 @@ Theseus, which is written in Go. This was built in order to make it easier to
 bootstrap our payments applications in ephemeral environments with all of their
 dependencies.
 
+<- slide ->
+
 ---
 
 # Go in Logistics
@@ -54,15 +56,20 @@ This has brought a massive improvement in productivity, reliability and
 observability of our processes. As well as a steady platform to expand our
 logistics operations into new markets.
 
-<- slides ->
-
 Go in particular has made this easy to do with its simplicity. We've found that
 engineers new to Go have had an easy time picking it up and becoming productive.
+
+<- slide ->
+<- slide ->
+<- slide ->
+<- slide ->
 
 Another benefit I consider is its relative lack of abstractions. Logistics is
 one of those domains with many edge cases. Go intentionally doesn't
 give you the power to build complicated abstractions that some other languages
 do.
+
+<- slide ->
 
 I find that heavy use of abstractions shifts the burden onto the *developer* to
 be sure that they are valid across a variety of scenarios, or in our case,

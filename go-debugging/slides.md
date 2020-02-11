@@ -46,6 +46,7 @@
 - Legacy Python scripts
   - Lack of monitoring
   - Email alerts
+  - Git clone deployment
 - Replaced with Go services
   - Deployed to Kubernetes
   - Prometheus, Sentry, OpsGenie
@@ -81,7 +82,7 @@
 
 # Leaky Abstractions
 
-![Leaky Rust Abstraction](./media/rust-dense.jpg){ width=350px }
+![(Probably) leaky Rust Abstraction](./media/rust-dense.jpg){ width=350px }
 
 ---
 
