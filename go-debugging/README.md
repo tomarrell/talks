@@ -226,6 +226,8 @@ And just something to note, Delve works best on Linux, a few commands are only
 available on Linux. If you're running a Mac, you can get most of the benefit
 running within a Docker container.
 
+<- slide ->
+
 ---
 
 # Race Conditions
@@ -235,6 +237,8 @@ First up, we'll have a look at a race condition.
 Someone a fair bit wiser than myself once said that, "ignoring this prohibition
 [of data races] introduces a practical risk of future miscompilation of the
 program."[1] In a bit more layman's terms, the dude was essentially saying...
+
+<- slide ->
 
 > **No race is a safe race.**
 >
@@ -247,12 +251,20 @@ Let's take a look at a simple program which contains a data race.
 
 [1]: https://www.usenix.org/legacy/event/hotpar11/tech/final_files/Boehm.pdf
 
+<- slide ->
+
+You can also build your production binaries like this. However you will need to
+be careful, as there is a performance penalty which you incur. This might just
+be worth it depending on your use case though.
+
+<- slide ->
+
 ---
 
 # Defer
 
 Defer is a well loved Go feature, allowing you to schedule work to be done
-before the function exits. 
+before the function exits.
 
 The unique thing about defer which makes it more powerful than simply having the
 compiler inline statements however is that it can be dynamically set.
@@ -279,27 +291,41 @@ when it crashes, and what sort of analysis we can do to it.
 
 # Memory Leaks
 
-// TODO
+Memory leaks are a bit more of a nuanced issue, that may only become a problem
+over extended periods time.
 
----
+In order to observe our applications over such periods, it's usually a good idea
+to have monitoring setup using something like Prometheus.
 
-# Goroutine Leaks
+Using the prometheus client will automatically scrape important metrics such as
+the heap size, as well as many other useful metrics.
 
-// TODO
+An alternative however is a neat little tool called `pprof`.
+
+You can retrieve a heap dump of the running application and render a tree
+showing all of the current inuse heap objects, as well as their size. This is
+particularly useful for identify the specific object causing the leak.
 
 ---
 
 # Goroutine Deadlocks
+
+Finally, we'll have a look at how you can identify goroutine deadlocks in your
+program.
 
 Debugging deadlocks within your program can be one of the most difficult things
 to debug. Especially in highly concurrent programs.
 
 Deadlocks can occur when two threads hold resources that the other is
 requesting. It can be made even more obscure when hidden behind a race
-condition, which was a case we ran into with a popular AMQP library.
+condition, which was a case we ran into with a bug in a popular AMQP library.
 
 pprof provides a profile for inspecting blocking behaviour in go programs,
-handily named the "blocking profile".
+handily named the "blocking profile". Unfortunately, this only reports the
+amount of time blocked on things that goroutines are no longer blocked on. If a
+routine stays blocked, this is not useful.
+
+Instead, you want to take a look at the
 
 ---
 
@@ -319,10 +345,10 @@ point. Unfortunately this doesn't work on Mac though.
 
 # Conclusion
 
-Let this talk be an example of different ways to debug some problems you'll
-inevitably run into when writing a lot of Go. This is by no means and exhaustive
-list, and I would strongly recommend you use the most suitable tool for the job
-in each situation.
+Let this talk be an example of different ways to debug some problems you may run
+into when writing a lot of Go. This is by no means and exhaustive list, and I
+would strongly recommend you use the most suitable tool for the job in each
+situation.
 
 Sometimes, fmt.Println really is just the best way to go.
 
@@ -331,17 +357,3 @@ Sometimes, fmt.Println really is just the best way to go.
 # Questions
 
 Anyone have any questions?
-
----
-
-# Delve TODO
-
-- dlv run: start debugging, disables optimisations, compiles code, starts
-    program, attaches to the process
-
-- dlv test: used for programs without main, compiles test binary, starts binary,
-    attaches to process
-
-- dlv attach <pid>: careful, program could be optimised and could run into
-    issues
-

@@ -176,6 +176,25 @@ func main() {
 
 ---
 
+# Scenario #1: Race Conditions
+
+Build your program with the `-race` flag. 
+
+
+It is possible to use on production binaries. However be warned, you will incur
+a performance penalty. This may be negligible though for the potential bug
+catching. *Profile your application*.
+
+Also.
+
+```
+$ go test -race mypkg   // check for races during tests
+$ go build -race mycmd  // build a binary with race detector
+$ go run -race mysrc.go // immediate run with race detector
+```
+
+---
+
 # Scenario #2: Deferred functions
 
 Are you getting values back from your function that you don't expect?
@@ -193,9 +212,80 @@ Delve displays it in **Intel** syntax.
 
 ---
 
-# Scenario #3: Postmortem
+# Scenario #3: Post-mortem
+
+Sometimes our application has already crashed and we'd like to get a better idea
+about the root cause.
+
+One possible tool in our investigative toolbox are core dumps.
+
+### Setup:
+```bash
+ulimit -c unlimited # Remove core dump size limit
+```
+
+### Terms:
+
+- **Core dump**: A memory snapshot of a process, usually after a crash.
 
 ---
+
+# Scenario #4: Memory Leaks
+
+Slightly more nuanced, may only become a problem over time.
+
+- Prometheus client, exposes heap information
+  - Use for heap size monitoring over time
+- pprof
+  - Use for heap inspection of running process to find problem objs
+
+Heap profiling with `pprof`.
+
+```bash
+go tool pprof localhost:8080/debug/pprof/heap
+> web
+> top
+```
+
+---
+
+# Scenario #5: Goroutine Deadlocks
+
+Very hard to debug.
+
+pprof **blocking** profile not useful for deadlocked routines, but useful for
+finding contentious resources in your program.
+
+pprof lets you inspect the state of each goroutine in your program.
+
+To get source annotated view of all goroutines in package `pkg`.
+
+```bash
+go tool pprof localhost:8080/debug/pprof/goroutine
+> list [pkg]
+```
+
+Alternatively, you can look at the **full goroutine stack dump** using:
+```
+curl localhost:8080/debug/pprof/goroutine?debug=2
+```
+
+---
+
+# Delve Tips
+
+* Debug your test binaries as well
+* `runtime.Breakpoint()`
+* Checkpoints let you restart the program from a specific point
+  * *Linux only*
+
+---
+
+> "Use the right tool for the job."
+>
+> – **Someone**, *I'm pretty sure*
+
+--
 
 *fin*
 
