@@ -10,10 +10,10 @@
 * Go in Logistics
 * Why we're moving to Go
 
-* Primitive debugging
+* Primitive
+* GDB
 * Delve
-
-// TODO
+* Scenarios
 
 ---
 
