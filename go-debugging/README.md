@@ -13,6 +13,8 @@
 * Primitive debugging
 * Delve
 
+// TODO
+
 ---
 
 # Go at SumUp
@@ -24,7 +26,7 @@ years. But it only really reached a production backend service early last year.
 
 We run most of our services inside Kubernetes, on AWS, after a period of
 migrating away from more primitive deployment methods. Some teams have included
-in their migation breaking up monolithic Ruby services into smaller Go
+in their migration breaking up monolithic Ruby services into smaller Go
 microservices, we'll touch on why this decision was made in a bit.
 
 In our payments domain, we have a custom environment bootstrapper we call
@@ -45,23 +47,27 @@ which was hooked up to a very large Postgres database. Since then, we've
 migrated our European operations to a new set of Golang services, which run in
 Kubernetes, and provide API's for other teams to interact with.
 
-Also during this time, we took 2 engineers with no background in Golang to being
+Also, during this time, we took 2 engineers with no background in Golang to being
 comfortable contributing.
 
 This has brought a massive improvement in productivity, reliability and
 observability of our processes. As well as a steady platform to expand our
 logistics operations into new markets.
 
+Here's an example of what our error reporting process used to look like.
+
+And another screenshot of our new alerting process.
+
 Go in particular has made this easy to do with its simplicity. We've found that
-engineers new to Go have had a easy time picking it up and becoming productive.
+engineers new to Go have had an easy time picking it up and becoming productive.
 
 Another benefit I consider is its relative lack of abstractions. Logistics is
-one of those domains with a large number of edge cases. Go intentionally doesn't
+one of those domains with many edge cases. Go intentionally doesn't
 give you the power to build complicated abstractions that some other languages
 do.
 
 I find that heavy use of abstractions shifts the burden onto the *developer* to
-be sure that they are valid across a variety of scenerios, or in our case,
+be sure that they are valid across a variety of scenarios, or in our case,
 markets. Spoiler alert, I believe that's probably impossible, and that most
 abstractions will begin to leak given enough time. Go nudges developers towards
 the path of practicality and solving the problem clearly, rather than
@@ -71,9 +77,9 @@ introducing too much indirection.
 
 # Why we're moving to Go
 
-SumUp is in the stage of it's growth where scaling the engineering practices in
+SumUp is in the stage of its growth where scaling the engineering practices in
 the organisation is important. Our engineering is rather scattered across the
-globe, including in our offices in Sao Paulo, Sofia, Cologne and two here in
+globe, including in our offices in São Paulo, Sofia, Cologne and two here in
 Berlin.
 
 Also, at SumUp we really encourage people to be "T" shaped. In other words,
@@ -112,7 +118,7 @@ already be familiar to you. Unfortunately though, Go programs tend confuse GDB
 with the way that they handle stack management, threading as well as a few other
 things.
 
-A quick example is the defer statement. You can use the defer statement to
+A quick example is the "defer" statement. You can use the defer statement to
 change the return value of the function, however this extra execution after a
 return is non-standard, and can lead to execution of code which is not expected
 by GDB.
@@ -143,7 +149,7 @@ familiar with. It's a simple and easy to use tool, especially when you want to
 inspect very specific parts of your program, and are running things locally on
 your machine.
 
-However if either of those things is not the case, the challenge begins.  What
+However, if either of those things is not the case, the challenge begins.  What
 if your bug occurs on the 237th iteration of this *for* loop? Or what if you
 don't know which iteration it occurs on? Or what if your program is already
 running, and you can't restart it in fear that you'll have to wait another 3
