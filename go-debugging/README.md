@@ -54,9 +54,7 @@ This has brought a massive improvement in productivity, reliability and
 observability of our processes. As well as a steady platform to expand our
 logistics operations into new markets.
 
-Here's an example of what our error reporting process used to look like.
-
-And another screenshot of our new alerting process.
+<- slides ->
 
 Go in particular has made this easy to do with its simplicity. We've found that
 engineers new to Go have had an easy time picking it up and becoming productive.
@@ -96,7 +94,22 @@ that bring value to the business.
 
 We now have teams in all 4 of our locations with engineering who are writing Go.
 
-// **TODO**: Maybe comparison with Ruby?
+Previously, most of the company was built in Ruby. Now don't get me wrong, I'm
+not knocking Ruby as a language, and there are still plenty of people who
+thoroughly enjoy writing it. However we've found the high level of abstraction
+that Ruby encourages to ultimately be detrimental to our organisational vision.
+
+Ruby on Rails with things such as ActiveRecord, Sneakers and Sidekiq, which were
+all used here at SumUp add an extra level of indirection between your code and
+the underlying mechanisms. We found it's usually more work to onboard people
+because of this, even if they've had prior experience with the concrete
+technologies such as Postgres, RabbitMQ, or even parallel ones such as
+Kubernetes cron jobs.
+
+From a hiring perspective, it's no longer feasible to hire developers who must
+have had experience with technology X. Therefore, we're investing in reducing
+abstractions where we can, to make our job of onboarding people easier. Go is an
+important piece in that puzzle for us.
 
 ---
 

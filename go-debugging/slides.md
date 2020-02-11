@@ -35,7 +35,42 @@
 - Legacy Python scripts
   - Lack of monitoring
   - Email alerts
+- Replaced with Go services
+  - Deployed to Kubernetes
+  - Prometheus, Sentry, OpsGenie
+- 2 engineers with no prior Go experience brought up to speed
 
+---
+
+# Go in Logistics
+
+![Alerting, the old way](./media/python-exception-email.png)
+
+---
+
+# Go in Logistics
+
+![Alerting, the new way](./media/sentry-report.png){ width=350px }
+
+---
+
+# Go in Logistics
+
+![Monitoring](./media/grafana-dashboard.png)
+
+---
+
+# Leaky Abstractions
+
+> All non-trivial abstractions, to some degree, are leaky.
+> 
+> – Joel Spolsky
+
+---
+
+# Leaky Abstractions
+
+![Leaky Rust Abstraction](./media/rust-dense.jpg){ width=350px }
 
 ---
 
