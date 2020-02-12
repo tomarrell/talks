@@ -180,10 +180,10 @@ func main() {
 
 Build your program with the `-race` flag. 
 
+Good idea to run your tests with this flag enabled.
 
-It is possible to use on production binaries. However be warned, you will incur
-a performance penalty. This may be negligible though for the potential bug
-catching. *Profile your application*.
+**Warning**: The race detector is not infallible, and it may possibly miss
+certains cases. However, it will never report false positives.
 
 Also.
 

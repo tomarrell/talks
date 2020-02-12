@@ -253,9 +253,9 @@ Let's take a look at a simple program which contains a data race.
 
 <- slide ->
 
-You can also build your production binaries like this. However you will need to
-be careful, as there is a performance penalty which you incur. This might just
-be worth it depending on your use case though.
+It is a good idea to run your tests with this flag enabled. Be warned though,
+the race detector is not infallible, and it may possibly miss certains cases.
+However, it will never report false positives.
 
 <- slide ->
 
