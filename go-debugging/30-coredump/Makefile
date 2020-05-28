@@ -1,7 +1,7 @@
 up:
 	docker run -p 8080:8080 -v /Users/tom/Documents/talks/go-debugging/30-coredump:/coredump -it golang:buster
 
-ulimit: ## Run this manually, with make command it will not work
+ulimit: ## Run this manually, with Make it will not work
 	ulimit -c unlimited
 
 build:

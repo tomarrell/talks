@@ -1,6 +1,6 @@
 % Debugging Go Programs
 % Tom Arrell
-% Wed 12th Feb – Golang Meetup – Berlin
+% Thursday 28th May – Golang Meetup – SumUp
 
 ---
 
