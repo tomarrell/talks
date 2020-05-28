@@ -1,10 +1,10 @@
 .PHONY: build
 build:
-	pandoc -t beamer -s ./slides.md -o out.pdf
+	pandoc -t beamer -s ./slides.md -o slides.pdf
 
 .PHONY: run
 run: build
-	open out.pdf
+	open slides.pdf
 
 .PHONY: build-notes
 build-notes:
