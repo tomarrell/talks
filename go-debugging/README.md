@@ -325,7 +325,8 @@ handily named the "blocking profile". Unfortunately, this only reports the
 amount of time blocked on things that goroutines are no longer blocked on. If a
 routine stays blocked, this is not useful.
 
-Instead, you want to take a look at the
+Instead, you want to take a look at the "full goroutine stack dump" which you
+can access at the path: `/debug/pprof/goroutine?debug=2`.
 
 ---
 

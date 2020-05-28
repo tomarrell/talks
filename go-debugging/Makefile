@@ -8,4 +8,4 @@ run: build
 
 .PHONY: build-notes
 build-notes:
-	pandoc README.md -o readme.pdf
+	pandoc README.md -o notes.pdf
