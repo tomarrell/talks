@@ -5,3 +5,7 @@ build:
 .PHONY: run
 run: build
 	open out.pdf
+
+.PHONY: build-notes
+build-notes:
+	pandoc README.md -o readme.pdf
